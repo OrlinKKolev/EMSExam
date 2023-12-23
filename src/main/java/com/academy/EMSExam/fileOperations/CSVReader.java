@@ -32,17 +32,3 @@ public class CSVReader implements CustomReader {
 		return record;
 	}
 }
-
-
-//				if (HelperMethods.isInt(values[0])) {
-//						//  TODO validations for input data
-//						employees.add(new Employee(Integer.parseInt(values[0]),
-//						values[1],
-//						LocalDate.parse(values[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-////							LocalDate.parse(values[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-//						Department.valueOf(values[4]),
-//						values[5],
-//						Double.parseDouble(values[6])));
-//						} else {
-//						br.readLine();
-//						}
