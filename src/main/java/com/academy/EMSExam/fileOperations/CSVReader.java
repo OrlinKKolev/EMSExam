@@ -1,13 +1,9 @@
 package com.academy.EMSExam.fileOperations;
-
 import com.academy.EMSExam.dto.LineDTO;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
