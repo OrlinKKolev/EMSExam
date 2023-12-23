@@ -8,14 +8,16 @@ import java.util.List;
 
 public class MainTest {
 	public static void main(String[] args) {
-		List<Serializable> records;
-		records = new ArrayList<>();
-//		CustomWriter writer = new CSVWriter();
+		//reader part
 		CustomReader reader = new CSVReader();
 		var resources = reader.read("./src/main/resources/files/generated_data.csv");
-//		System.out.println(records);
 		System.out.println(resources);
-//		writer.write(employees, "./src/main/resources/files/parsed_data.csv");
+		//writer part
+		List<Serializable> parsedData = new ArrayList<>();
+		CustomWriter writer = new CSVWriter();
+		parsedData.addAll(resources);
+		writer.write(resources, "./src/main/resources/files/parsed_data.csv");
+		System.out.println(parsedData);
 	}
 
 }
