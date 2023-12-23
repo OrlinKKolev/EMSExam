@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class CustomDateFormatter {
 	public static LocalDate parseDate(String date) {
-		if (Objects.equals(date, "null")) {
+		if (date==null) {
 			return LocalDate.now();
 		} else {
 			DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder()
