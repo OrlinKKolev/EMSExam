@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 
-public class DateFormatter {
+public class CustomDateFormatter {
 	public static LocalDate parseDate(String date) {
 		DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder()
 				.append(DateTimeFormatter
