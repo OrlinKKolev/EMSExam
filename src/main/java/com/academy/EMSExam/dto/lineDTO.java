@@ -1,8 +1,9 @@
 package com.academy.EMSExam.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class lineDTO {
+public class lineDTO implements Serializable {
 	int empId;
 	int projectId;
 	String dateFrom;
