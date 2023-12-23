@@ -18,6 +18,7 @@ public class MainTest {
 		parsedData.addAll(resources);
 		writer.write(resources, "./src/main/resources/files/parsed_data.csv");
 		System.out.println(parsedData);
+		System.out.println(resources.get(0));
 	}
 
 }

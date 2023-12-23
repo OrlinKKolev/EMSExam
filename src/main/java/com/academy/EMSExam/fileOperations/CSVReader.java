@@ -1,5 +1,7 @@
 package com.academy.EMSExam.fileOperations;
 import com.academy.EMSExam.dto.LineDTO;
+import com.academy.EMSExam.utils.HelperMethods;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
