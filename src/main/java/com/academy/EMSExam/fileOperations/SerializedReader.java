@@ -1,6 +1,6 @@
 package com.academy.EMSExam.fileOperations;
 
-import com.academy.EMSExam.dto.lineDTO;
+import com.academy.EMSExam.dto.LineDTO;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,11 +13,11 @@ public class SerializedReader implements CustomReader {
 
 	@Override
 	public List<? extends Serializable> read(String filename) {
-		List<lineDTO> items = new ArrayList<>();
+		List<LineDTO> items = new ArrayList<>();
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
 			while (true) {
 				try {
-					lineDTO item = (lineDTO) ois.readObject();
+					LineDTO item = (LineDTO) ois.readObject();
 					items.add(item);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
