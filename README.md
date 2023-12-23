@@ -42,11 +42,11 @@ algorithm.
 1. The task solution needs to be uploaded in GitHub
 
 ## Solution:
-Solution is divided into serveral phases
+Solution is divided into several phases
 
 #### PHASE ONE:
-1. read the CSV by rows
-1. identify different date formats and reformat the dates in ISO format.
+1. read the CSV by rows {done/console}
+1. identify different date formats and reformat the dates in ISO format. {done/console}
 1. upload the input data in postgresDB with hibernate & JPA. Use @Entity and repository.saveall.
 1. generate DDL for the DB in readme file
 
