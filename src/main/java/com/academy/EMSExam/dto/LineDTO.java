@@ -15,4 +15,9 @@ public class LineDTO implements Serializable {
 		this.dateFrom = dateFrom;
 		this.dateTo = dateTo;
 	}
+	@Override
+	public String toString() {
+
+		return this.empId + "," + this.projectId + "," + this.dateFrom + "," + this.dateTo;
+	}
 }
