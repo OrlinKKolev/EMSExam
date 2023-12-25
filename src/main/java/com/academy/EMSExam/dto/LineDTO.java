@@ -5,10 +5,10 @@ import java.time.LocalDate;
 
 
 public class LineDTO implements Serializable {
-	int empId;
-	int projectId;
-	String dateFrom;
-	String dateTo;
+	private int empId;
+	private int projectId;
+	private String dateFrom;
+	private String dateTo;
 
 	public LineDTO(int empId, int projectId, LocalDate dateFrom, LocalDate dateTo) {
 		this.empId = empId;
@@ -16,6 +16,23 @@ public class LineDTO implements Serializable {
 		this.dateFrom = String.valueOf(dateFrom);
 		this.dateTo = String.valueOf(dateTo);
 	}
+
+	public int getEmpId() {
+		return empId;
+	}
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public String getDateFrom() {
+		return dateFrom;
+	}
+
+	public String getDateTo() {
+		return dateTo;
+	}
+
 	@Override
 	public String toString() {
 
