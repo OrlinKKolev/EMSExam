@@ -3,6 +3,7 @@ package com.academy.EMSExam;
 import com.academy.EMSExam.dto.LineDTO;
 import com.academy.EMSExam.model.Pair;
 import com.academy.EMSExam.repository.CSVRepository;
+import com.academy.EMSExam.utils.Globals;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -22,21 +23,32 @@ public class MainTest {
 		System.out.println(projectsByParis);
 
 
-		Pair pair1 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-10-01"),
+		Pair pair1 = new Pair(Globals.counter,5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-10-01"),
 										103, LocalDate.parse("2023-12-01"), LocalDate.parse("2024-05-01"));
+		Globals.counter++;
 		System.out.println(pair1.duration());
-
-		Pair pair2 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"),
+		Pair pair2 = new Pair(Globals.counter,5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"),
 											103, LocalDate.parse("2023-12-01"), LocalDate.parse("2024-05-01"));
+		Globals.counter++;
 		System.out.println(pair2.duration());
-
-		Pair pair3 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"),
+		Pair pair3 = new Pair(Globals.counter,5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"),
 										103, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"));
+		Globals.counter++;
 		System.out.println(pair3.duration());
-
-		Pair pair4 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2022-10-01"),
+		Pair pair4 = new Pair(Globals.counter,5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2022-10-01"),
 				103, LocalDate.parse("2022-10-01"), LocalDate.parse("2022-10-01"));
+		Globals.counter++;
 		System.out.println(pair4.duration());
+		System.out.println(pair4.getPairid());
+
+		for (int i = 0; i < projects.size(); i++) {
+			System.out.println(projectsByParis.get(projects.get(i)));
+			for (int j = 0; j < projectsByParis.size(); j++) {
+
+			}
+
+		}
+
 
 
 		//		//writer part
@@ -72,7 +84,7 @@ public class MainTest {
 				employees.add(dto.getEmpId());
 			}
 		}
-		//List with all employees in the records
+		Collections.sort(employees); //slows performance, but is used for easier visual testing
 		return employees;
 	}
 
@@ -85,6 +97,7 @@ public class MainTest {
 				projects.add(dto.getProjectId());
 			}
 		}
+		Collections.sort(projects); //slows performance, but is used for easier visual testing
 		return projects;
 	}
 
