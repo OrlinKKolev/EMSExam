@@ -7,14 +7,14 @@ import java.time.LocalDate;
 public class LineDTO implements Serializable {
 	private int empId;
 	private int projectId;
-	private String dateFrom;
-	private String dateTo;
+	private LocalDate dateFrom;
+	private LocalDate dateTo;
 
 	public LineDTO(int empId, int projectId, LocalDate dateFrom, LocalDate dateTo) {
 		this.empId = empId;
 		this.projectId = projectId;
-		this.dateFrom = String.valueOf(dateFrom);
-		this.dateTo = String.valueOf(dateTo);
+		this.dateFrom = dateFrom;
+		this.dateTo = dateTo;
 	}
 
 	public int getEmpId() {
@@ -25,17 +25,17 @@ public class LineDTO implements Serializable {
 		return projectId;
 	}
 
-	public String getDateFrom() {
+	public LocalDate getDateFrom() {
 		return dateFrom;
 	}
 
-	public String getDateTo() {
+	public LocalDate getDateTo() {
 		return dateTo;
 	}
 
 	@Override
 	public String toString() {
 
-		return this.empId + "," + this.projectId + "," + this.dateFrom + "," + this.dateTo;
+		return this.empId + "," + this.projectId + "," + this.dateFrom.toString() + "," + this.dateTo.toString();
 	}
 }
