@@ -8,12 +8,12 @@ import java.util.concurrent.TimeUnit;
 
 
 public class Pair {
-	private int pairId;
-	private int projectId;
-	private int employeeId1;
+	private final int pairId;
+	private final int projectId;
+	private final int employeeId1;
 	private LocalDate startDate1;
 	private LocalDate endDate1;
-	private int employeeId2;
+	private final int employeeId2;
 	private LocalDate startDate2;
 	private LocalDate endDate2;
 
@@ -84,7 +84,7 @@ public class Pair {
 		} else periodEnd = endDate1;
 
 		Duration duration = Duration.between(periodStart.atStartOfDay(), periodEnd.atStartOfDay());
-		long durationInDays = duration.toDays()+1; //Duration function returns -1 day
+		long durationInDays = duration.toDays() + 1; //Duration function returns -1 day
 		if (durationInDays < 1) {
 			return 0;
 		} else return durationInDays;
