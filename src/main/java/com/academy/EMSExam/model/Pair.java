@@ -17,15 +17,16 @@ public class Pair {
 	private LocalDate startDate2;
 	private LocalDate endDate2;
 
-	public Pair(int projectId, int employeeId1, LocalDate startDate1, LocalDate endDate1, int employeeId2, LocalDate startDate2, LocalDate endDate2) {
-		this(projectId, employeeId1, employeeId2);
+	public Pair(int pairId, int projectId, int employeeId1, LocalDate startDate1, LocalDate endDate1, int employeeId2, LocalDate startDate2, LocalDate endDate2) {
+		this(pairId, projectId, employeeId1, employeeId2);
 		this.startDate1 = startDate1;
 		this.endDate1 = endDate1;
 		this.startDate2 = startDate2;
 		this.endDate2 = endDate2;
 	}
 
-	public Pair(int projectId, int employeeId1, int employeeId2) {
+	public Pair(int pairId, int projectId, int employeeId1, int employeeId2) {
+		this.pairId=pairId;
 		this.projectId = projectId;
 		this.employeeId1 = employeeId1;
 		this.employeeId2 = employeeId2;
