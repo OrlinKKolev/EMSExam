@@ -22,9 +22,22 @@ public class MainTest {
 		System.out.println(projectsByParis);
 
 
-		Pair pair1 = new Pair(5, 102, LocalDate.parse("2023-12-19"), LocalDate.parse("2023-12-27"), 103, LocalDate.parse("2023-12-18"), LocalDate.parse("2023-12-26"));
-		System.out.println(pair1.period());
-		System.out.println(pair1.getPairid());
+		Pair pair1 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-10-01"),
+										103, LocalDate.parse("2023-12-01"), LocalDate.parse("2024-05-01"));
+		System.out.println(pair1.duration());
+
+		Pair pair2 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"),
+											103, LocalDate.parse("2023-12-01"), LocalDate.parse("2024-05-01"));
+		System.out.println(pair2.duration());
+
+		Pair pair3 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"),
+										103, LocalDate.parse("2022-10-01"), LocalDate.parse("2023-12-31"));
+		System.out.println(pair3.duration());
+
+		Pair pair4 = new Pair(5, 102, LocalDate.parse("2022-10-01"), LocalDate.parse("2022-10-01"),
+				103, LocalDate.parse("2022-10-01"), LocalDate.parse("2022-10-01"));
+		System.out.println(pair4.duration());
+
 
 		//		//writer part
 //		List<Serializable> parsedData = new ArrayList<>();
