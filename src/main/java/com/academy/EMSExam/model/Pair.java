@@ -26,10 +26,46 @@ public class Pair {
 	}
 
 	public Pair(int pairId, int projectId, int employeeId1, int employeeId2) {
-		this.pairId=pairId;
+		this.pairId = pairId;
 		this.projectId = projectId;
 		this.employeeId1 = employeeId1;
 		this.employeeId2 = employeeId2;
+	}
+
+	public LocalDate getStartDate1() {
+		return startDate1;
+	}
+
+	public void setStartDate1(LocalDate startDate1) {
+		this.startDate1 = startDate1;
+	}
+
+	public LocalDate getEndDate1() {
+		return endDate1;
+	}
+
+	public void setEndDate1(LocalDate endDate1) {
+		this.endDate1 = endDate1;
+	}
+
+	public LocalDate getStartDate2() {
+		return startDate2;
+	}
+
+	public void setStartDate2(LocalDate startDate2) {
+		this.startDate2 = startDate2;
+	}
+
+	public LocalDate getEndDate2() {
+		return endDate2;
+	}
+
+	public void setEndDate2(LocalDate endDate2) {
+		this.endDate2 = endDate2;
+	}
+
+	public int getProjectId() {
+		return projectId;
 	}
 
 	public int getPairid() {
