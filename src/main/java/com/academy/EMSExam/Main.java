@@ -13,66 +13,31 @@ public class Main {
 	public static void main(String[] args) {
 		var resources = Globals.resources;
 		var employees = listAllEmployees(resources);
-		var projects = listAllProjects(resources);
-		var projectsByParis = listProjectsByPairs(resources, projects);
+		List<Integer> projects = listAllProjects(resources);
+		ArrayDeque<Integer> queue = new ArrayDeque<>();
+		queue.addAll(projects);
+		var projectsByParis = listProjectsByPairs(resources, queue);
 
 //TEST	System.out.println(resources);
 //TEST	System.out.println(employees);
-//TEST	System.out.println(projects);
+		System.out.println(projects);
 		System.out.println(projectsByParis);
 
-	//pair creation
+		//pair creation
 		var pairs = pairs(projects, projectsByParis);
-//TEST		System.out.println(Arrays.toString(pairs.toArray()));
-//TEST		System.out.println(pairs.getFirst().duration());
 
-	//durations calculation
+		//durations calculation
 		var durations = calculateDurations(pairs);
 		System.out.println(durations);
 		System.out.println(Globals.bestTeam);
 		System.out.println(Globals.bestTeamDuration);
+		System.out.println(Globals.bestTeamProjects);
+
 	}
 
-	public static List<Pair> pairs(List<Integer> projects, HashMap<Integer, List<Integer>> projectsByParis) {
-		List<Pair> pairs = new ArrayList<>();
-		for (int projId : projects) {
-			var empList = projectsByParis.get(projId);
-//TEST			System.out.printf("%n<-->empList: %s%n", empList.toString());
-			if (empList.size() == 2) {
-				Pair pair = pairMaker(projId, empList);
-//TEST			System.out.printf("key: %s%n", pair.key());
-//TEST			System.out.printf("projId: %d%n", pair.getProjectId());
-//TEST			System.out.printf("pairId: %d%n", pair.getPairid());
-//TEST			System.out.printf("duration: %d%n", pair.duration());
-				pairs.add(pair);
-			} else {
-				System.out.println("Big Code");
-			}
-		}
-
-		return pairs;
-	}
-
-
-	public static Map<String, Long> calculateDurations(List<Pair> pairs) {
-		//iterate through the list of pairs and calculate total duration of the pair. Put in new HashMap <key,duration>
-		Map<String, Long> durations = new HashMap<>();
-		for (Pair pairKey : pairs) {
-			long sumDuration = 0;
-			for (Pair pair : pairs) {
-				if (pair.key().equals(pairKey.key())) {
-					sumDuration += pair.duration();
-				}
-				durations.put(pairKey.key(), sumDuration);
-			}
-			if (Globals.bestTeamDuration < sumDuration) {
-				Globals.bestTeamDuration = sumDuration;
-				Globals.bestTeam = pairKey.key();
-			}
-		}
-
-		return durations;
-	}
+	/**
+	 * iterate through the list of pairs and calculate total duration of the pair. Put in new HashMap <key,duration>
+	 */
 
 	public static Pair pairMaker(int projId, List<Integer> empList) {
 		int emp1 = empList.get(0);
@@ -82,8 +47,49 @@ public class Main {
 		pair.setStartDate2(extractDateFrom(emp2, projId, Globals.resources));
 		pair.setEndDate1(extractDateTo(emp1, projId, Globals.resources));
 		pair.setEndDate2(extractDateTo(emp2, projId, Globals.resources));
-				return pair;
+		return pair;
 	}
+
+	public static List<Pair> pairs(List<Integer> projects, HashMap<Integer, List<Integer>> projectsByParis) {
+		List<Pair> pairs = new ArrayList<>();
+		for (int projId : projects) {
+			var empList = projectsByParis.get(projId);
+			if (empList.size() >1 ) {
+				Pair pair = pairMaker(projId, empList);
+				pairs.add(pair);
+			} else {
+				System.out.println("Big Code");
+			}
+		}
+		return pairs;
+	}
+
+	/**
+	 * iterate through the list of pairs and calculate total duration of the pair. Put in new HashMap <key,duration>
+	 */
+	public static Map<String, Long> calculateDurations(List<Pair> pairs) {
+		Map<String, Long> durations = new HashMap<>();
+		for (Pair pairKey : pairs) {
+			long sumDuration = 0;
+			for (Pair pair : pairs) {
+				if (pair.key().equals(pairKey.key())) {
+					sumDuration += pair.calcDuration();
+					durations.put(pairKey.key(), sumDuration);
+				}
+			}
+			if (Globals.bestTeamDuration < sumDuration) {
+				Globals.bestTeamDuration = sumDuration;
+				Globals.bestTeam = pairKey.key();
+			}
+		}
+		for (Pair pair : pairs) {
+			if (pair.key().equals(Globals.bestTeam)) {
+				Globals.bestTeamProjects.put(pair.getProjectId(), pair.calcDuration());
+			}
+		}
+		return durations;
+	}
+
 
 	public static LocalDate extractDateFrom(int empId, int projId, List<? extends Serializable> resources) {
 		for (Serializable resource : resources) {
@@ -105,9 +111,11 @@ public class Main {
 		return null;
 	}
 
-
+	/**
+	 * create lists with unique values. Use List instead of Set, because I want to get values by index
+	 */
 	public static List<Integer> listAllEmployees(List<? extends Serializable> resources) {
-		//crate lists with unique values. Use List instead of Set, because I want to get values by index
+
 		List<Integer> employees = new ArrayList<>();
 		for (Serializable resource : resources) {
 			LineDTO dto = (LineDTO) resource;
@@ -115,12 +123,14 @@ public class Main {
 				employees.add(dto.getEmpId());
 			}
 		}
-		Collections.sort(employees); //slows performance, but is used for easier visual testing
 		return employees;
 	}
 
+	/**
+	 * crate lists with unique values. Use List instead of Set, because I want to get values by index
+	 */
 	public static List<Integer> listAllProjects(List<? extends Serializable> resources) {
-		//crate lists with unique values. Use List instead of Set, because I want to get values by index
+
 		List<Integer> projects = new ArrayList<>();
 		for (Serializable resource : resources) {
 			LineDTO dto = (LineDTO) resource;
@@ -128,29 +138,33 @@ public class Main {
 				projects.add(dto.getProjectId());
 			}
 		}
-		Collections.sort(projects); //slows performance, but is used for easier visual testing
 		return projects;
 	}
 
-	public static HashMap<Integer, List<Integer>> listProjectsByPairs(List<? extends Serializable> resources, List<? extends Serializable> projects) {
-		//loops through all items and put in list with unique EmpIDs
+	/**
+	 * loops through all items and put in list with unique EmpIDs
+	 */
+	public static HashMap<Integer, List<Integer>> listProjectsByPairs(List<? extends Serializable> resources, ArrayDeque<Integer> projectsQueue) {
 		HashMap<Integer, List<Integer>> projectsWithPairs = new HashMap<>();
-		int projectIdMatcher = 1;
-		for (int i = 0; i < projects.size(); i++) {
-			List<Integer> employeesPerProject = new ArrayList<>();
-			for (Serializable resource : resources) {
-				LineDTO dto = (LineDTO) resource;
-				if (!employeesPerProject.contains(dto.getEmpId())) {
-					if (dto.getProjectId() == projectIdMatcher) {
-						employeesPerProject.add(dto.getEmpId());
+		while (!projectsQueue.isEmpty()) {
+			int size = projectsQueue.size();
+			for (int i = 0; i < size; i++) {
+				int projectIdMatcher = projectsQueue.pop();
+				List<Integer> employeesPerProject = new ArrayList<>();
+				for (Serializable resource : resources) {
+					LineDTO dto = (LineDTO) resource;
+					if (!employeesPerProject.contains(dto.getEmpId())) {
+						if (dto.getProjectId() == projectIdMatcher) {
+							employeesPerProject.add(dto.getEmpId());
+						}
 					}
 				}
-			}
-			Collections.sort(employeesPerProject);
 //TEST		System.out.printf("ProjID:%d, EmpID: %s %n", projectIdMatcher, employeesPerProject);
-			projectsWithPairs.put(projectIdMatcher, employeesPerProject);
-			projectIdMatcher++;
+				projectsWithPairs.put(projectIdMatcher, employeesPerProject);
+//				projectsQueue.removeFirst();
+			}
 		}
 		return projectsWithPairs;
 	}
+
 }
