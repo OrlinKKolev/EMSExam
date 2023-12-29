@@ -34,53 +34,40 @@ public class Pair {
 		this.employeeId2 = employeeId2;
 	}
 
-	public LocalDate getStartDate1() {
-		return startDate1;
-	}
+
 
 	public void setStartDate1(LocalDate startDate1) {
 		this.startDate1 = startDate1;
 	}
 
-	public LocalDate getEndDate1() {
-		return endDate1;
-	}
+
 
 	public void setEndDate1(LocalDate endDate1) {
 		this.endDate1 = endDate1;
 	}
 
-	public LocalDate getStartDate2() {
-		return startDate2;
-	}
+
 
 	public void setStartDate2(LocalDate startDate2) {
 		this.startDate2 = startDate2;
 	}
 
-	public LocalDate getEndDate2() {
-		return endDate2;
-	}
+
 
 	public void setEndDate2(LocalDate endDate2) {
 		this.endDate2 = endDate2;
 	}
 
-	public int getProjectId() {
-		return projectId;
-	}
 
-	public int getPairid() {
-		return pairId;
-	}
+
 
 	public long duration() {
-		LocalDate periodStart = null;
+		LocalDate periodStart;
 		if (startDate1.isBefore(startDate2)) {
 			periodStart = startDate2;
 		} else periodStart = startDate1;
 
-		LocalDate periodEnd = null;
+		LocalDate periodEnd;
 		if (endDate1.isAfter(endDate2)) {
 			periodEnd = endDate2;
 		} else periodEnd = endDate1;
