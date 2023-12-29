@@ -39,9 +39,9 @@ public class Main {
 	 * iterate through the list of pairs and calculate total duration of the pair. Put in new HashMap <key,duration>
 	 */
 
-	public static Pair pairMaker(int projId, List<Integer> empList) {
-		int emp1 = empList.get(0);
-		int emp2 = empList.get(1);
+	public static Pair pairMaker(int projId, List<Integer> empList,int i, int j) {
+		int emp1 = empList.get(i);
+		int emp2 = empList.get(j);
 		Pair pair = new Pair(Globals.pairCounter, projId, emp1, emp2);
 		pair.setStartDate1(extractDateFrom(emp1, projId, Globals.resources));
 		pair.setStartDate2(extractDateFrom(emp2, projId, Globals.resources));
@@ -54,11 +54,16 @@ public class Main {
 		List<Pair> pairs = new ArrayList<>();
 		for (int projId : projects) {
 			var empList = projectsByParis.get(projId);
-			if (empList.size() >1 ) {
-				Pair pair = pairMaker(projId, empList);
+			if (empList.size() ==2 ) {
+				Pair pair = pairMaker(projId, empList,0,1);
 				pairs.add(pair);
 			} else {
-				System.out.println("Big Code");
+				for (int i = 0; i < empList.size(); i++) {
+					for (int j = i+1; j <empList.size() ; j++) {
+						Pair pair = pairMaker(projId, empList,i,j);
+						pairs.add(pair);
+					}
+				}
 			}
 		}
 		return pairs;
