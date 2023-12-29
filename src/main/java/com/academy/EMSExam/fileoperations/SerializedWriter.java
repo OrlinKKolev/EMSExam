@@ -1,4 +1,4 @@
-package com.academy.EMSExam.fileOperations;
+package com.academy.EMSExam.fileoperations;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
