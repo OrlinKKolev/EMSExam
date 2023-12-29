@@ -2,9 +2,6 @@ package com.academy.EMSExam.model;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 public class Pair {
@@ -16,6 +13,11 @@ public class Pair {
 	private final int employeeId2;
 	private LocalDate startDate2;
 	private LocalDate endDate2;
+	public String key (){
+		String text1= String.valueOf(employeeId1);
+		String text2= String.valueOf(employeeId2);
+		return text1+"|"+text2;
+	}
 
 	public Pair(int pairId, int projectId, int employeeId1, LocalDate startDate1, LocalDate endDate1, int employeeId2, LocalDate startDate2, LocalDate endDate2) {
 		this(pairId, projectId, employeeId1, employeeId2);
