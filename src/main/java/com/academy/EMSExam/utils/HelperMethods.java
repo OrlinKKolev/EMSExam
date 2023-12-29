@@ -1,12 +1,5 @@
 package com.academy.EMSExam.utils;
 
-import com.academy.EMSExam.MainTest;
-import com.academy.EMSExam.dto.LineDTO;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 public class HelperMethods {
 
 	public static boolean hasHeaders = false;
