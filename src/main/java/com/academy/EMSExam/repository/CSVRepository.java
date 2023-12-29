@@ -1,8 +1,6 @@
 package com.academy.EMSExam.repository;
 
-import com.academy.EMSExam.fileOperations.CSVReader;
-import com.academy.EMSExam.fileOperations.CustomReader;
-
+import com.academy.EMSExam.fileoperations.*;
 import java.io.Serializable;
 import java.util.List;
 
