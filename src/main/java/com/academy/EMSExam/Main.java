@@ -8,8 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
-public class MainTest {
-
+public class Main {
 
 	public static void main(String[] args) {
 		var resources = Globals.resources;
@@ -17,70 +16,61 @@ public class MainTest {
 		var projects = listAllProjects(resources);
 		var projectsByParis = listProjectsByPairs(resources, projects);
 
-		System.out.println(resources);
-		System.out.println(employees);
-		System.out.println(projects);
+//TEST	System.out.println(resources);
+//TEST	System.out.println(employees);
+//TEST	System.out.println(projects);
 		System.out.println(projectsByParis);
 
+	//pair creation
+		var pairs = pairs(projects, projectsByParis);
+//TEST		System.out.println(Arrays.toString(pairs.toArray()));
+//TEST		System.out.println(pairs.getFirst().duration());
 
-		List<String> pairKeys = new ArrayList<>();
+	//durations calculation
+		var durations = calculateDurations(pairs);
+		System.out.println(durations);
+		System.out.println(Globals.bestTeam);
+		System.out.println(Globals.bestTeamDuration);
+	}
+
+	public static List<Pair> pairs(List<Integer> projects, HashMap<Integer, List<Integer>> projectsByParis) {
 		List<Pair> pairs = new ArrayList<>();
 		for (int projId : projects) {
 			var empList = projectsByParis.get(projId);
-			System.out.printf("%n<-->empList: %s%n", empList.toString());
+//TEST			System.out.printf("%n<-->empList: %s%n", empList.toString());
 			if (empList.size() == 2) {
 				Pair pair = pairMaker(projId, empList);
-				System.out.printf("key: %s%n", pair.key());
-				System.out.printf("projId: %d%n", pair.getProjectId());
-				System.out.printf("pairId: %d%n", pair.getPairid());
-				System.out.printf("duration: %d%n", pair.duration());
-				pairKeys.add(pair.key());
+//TEST			System.out.printf("key: %s%n", pair.key());
+//TEST			System.out.printf("projId: %d%n", pair.getProjectId());
+//TEST			System.out.printf("pairId: %d%n", pair.getPairid());
+//TEST			System.out.printf("duration: %d%n", pair.duration());
 				pairs.add(pair);
 			} else {
 				System.out.println("Big Code");
 			}
 		}
-		System.out.println(pairKeys);
-		System.out.println(pairs.getFirst().duration());
-
-
-		var durations = calculateDurations(pairKeys,pairs);
-		System.out.println(durations);
-		System.out.println(Globals.bestTeam);
-		System.out.println(Globals.bestTeamDuration);
-
-	}
-	public static List<String> pairKeys()
-	{
-		List<String> pairKeys = new ArrayList<>();
-
-		return pairKeys;
-	}
-
-	public static List<Pair> pairs()
-	{
-		List<Pair> pairs = new ArrayList<>();
 
 		return pairs;
 	}
 
 
-	public static Map<String, Long> calculateDurations (List<String> pairKeys, List<Pair> pairs){
+	public static Map<String, Long> calculateDurations(List<Pair> pairs) {
 		//iterate through the list of pairs and calculate total duration of the pair. Put in new HashMap <key,duration>
 		Map<String, Long> durations = new HashMap<>();
-		for (String pairKey : pairKeys) {
+		for (Pair pairKey : pairs) {
 			long sumDuration = 0;
 			for (Pair pair : pairs) {
-				if (pair.key().equals(pairKey)) {
+				if (pair.key().equals(pairKey.key())) {
 					sumDuration += pair.duration();
 				}
-				durations.put(pairKey, sumDuration);
+				durations.put(pairKey.key(), sumDuration);
 			}
-			if (Globals.bestTeamDuration<sumDuration){
-				Globals.bestTeamDuration=sumDuration;
-				Globals.bestTeam=pairKey;
+			if (Globals.bestTeamDuration < sumDuration) {
+				Globals.bestTeamDuration = sumDuration;
+				Globals.bestTeam = pairKey.key();
 			}
 		}
+
 		return durations;
 	}
 
@@ -92,8 +82,7 @@ public class MainTest {
 		pair.setStartDate2(extractDateFrom(emp2, projId, Globals.resources));
 		pair.setEndDate1(extractDateTo(emp1, projId, Globals.resources));
 		pair.setEndDate2(extractDateTo(emp2, projId, Globals.resources));
-		return pair;
-
+				return pair;
 	}
 
 	public static LocalDate extractDateFrom(int empId, int projId, List<? extends Serializable> resources) {
@@ -147,8 +136,7 @@ public class MainTest {
 		//loops through all items and put in list with unique EmpIDs
 		HashMap<Integer, List<Integer>> projectsWithPairs = new HashMap<>();
 		int projectIdMatcher = 1;
-		for (
-				int i = 0; i < projects.size(); i++) {
+		for (int i = 0; i < projects.size(); i++) {
 			List<Integer> employeesPerProject = new ArrayList<>();
 			for (Serializable resource : resources) {
 				LineDTO dto = (LineDTO) resource;
@@ -159,7 +147,7 @@ public class MainTest {
 				}
 			}
 			Collections.sort(employeesPerProject);
-			System.out.printf("ProjID:%d, EmpID: %s %n", projectIdMatcher, employeesPerProject);
+//TEST		System.out.printf("ProjID:%d, EmpID: %s %n", projectIdMatcher, employeesPerProject);
 			projectsWithPairs.put(projectIdMatcher, employeesPerProject);
 			projectIdMatcher++;
 		}
