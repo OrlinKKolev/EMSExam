@@ -3,11 +3,11 @@ package com.academy.EMSExam.utils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.Objects;
+
 
 public class CustomDateFormatter {
 	public static LocalDate parseDate(String date) {
-		if (date==null) {
+		if (date == null) {
 			return LocalDate.now();
 		} else {
 			DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder()
