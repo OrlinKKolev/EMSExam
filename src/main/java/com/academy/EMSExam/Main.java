@@ -12,6 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		var resources = Globals.resources;
+		// calculation part
 		List<Integer> employees = listAllEmployees(resources);
 		List<Integer> projects = listAllProjects(resources);
 		ArrayDeque<Integer> empIdQueue = new ArrayDeque<>();
@@ -19,6 +20,9 @@ public class Main {
 		HashMap<Integer, List<Integer>> projectsByEmpId = listProjectsByEmpId(resources, empIdQueue);
 		List<Pair> pairs = pairs(projects, projectsByEmpId);
 		HashMap<String, Long> durations = calculateDurations(pairs);
+		if (Globals.bestTeam == null) {
+			return;
+		}
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome to Best Team Identification System");
 		boolean isRunning = true;
