@@ -47,27 +47,66 @@ Solution is divided into several phases
 #### PHASE ONE:
 1. read the CSV by rows {done/console}
 1. identify different date formats and reformat the dates in ISO format. {done/console}
-1. upload the input data in postgresDB with hibernate & JPA. Use @Entity and repository.saveall.
-1. generate DDL for the DB in readme file
+1. save all resources in base memory. {done/console}
 
 #### PHASE TWO:
-2.1 Set up spring application with database connectivity
-2....
+2. read the resources and extract them in different data collections for further processing. {done/console}
+2. process the collections to identify "the best team" {done/console}
+
+#### PHASE THREE:
+3. represent the result data {done/console}
 
 
 ## ALGORITHM:
--> Collection for each project. 
+-> Collections for all the projects. Returns List<projects>
 ```
-HashMap (<projectid>, List<employeeid>)
-List<employeeid>
-  -> If list length =2 
-  -> else 
-		examine duration of each employee and match. Save data in object Pair. Write all pairs in DB.
+List<Integer> projects = listAllProjects(resources);
+[1,2,3...]
+```
+-> Map for each project by employeeid. Returns HashMap<projects, List<employeeid>>
+```
+HashMap<Integer, List<Integer>> projectsByParis = listProjectsByEmpId(resources, empIdQueue);
+{1=[101,102,103], 2=[102,104], 4=[101,102,106]...}
  ``` 
--> Collection for all pairs
+-> Collection for all pairs. Returns List<Pairs>
 ```
-SortedMap(<projectid>, List<Pair>)
+Pair class has all necesary fields for pair definiton and method for duration calculation
+```
+-> Map for duration of pair working together. Reruns HashMap<pairKey, duration> durations = calculateDurations(pairs);
+```
+HashMap<String, Long> durations = calculateDurations(pairs);
+{103|111=203, 101|106=1060, 101|105=1788...}
+
+
 ```
 
--> Set by pairs <K,V>
+
+## Program data parameters
+#### Employees ID's:
+Data type is integer.
+One employee can have only one record by certain project.
+
+
+####  Projects ID's:
+Data type is integer.
+
+#### Dates:
+-> Supported date formats:
+```
+[yyyyMMdd]
+[yyyy-MM-dd]
+[yyyy.MM.dd]
+[MM/dd/yyyy]
+[dd-MM-yyyy]
+[dd.MM.yyyy]
+```
+-> When date is Null program gets today. Null handler is case insensitive.
+```
+Null
+nuLL
+nUlL
+etc...
+```
+#### CSV test file:
+Test data is generated on https://www.mockaroo.com/ with 11 employees and 9 projects, then is further processed is MSExcel to suit the requirements. Originally generated data is MOCK_DATA.csv. 
 ...
