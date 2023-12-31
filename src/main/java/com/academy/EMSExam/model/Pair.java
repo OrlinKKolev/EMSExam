@@ -34,23 +34,18 @@ public class Pair {
 		this.employeeId1 = employeeId1;
 		this.employeeId2 = employeeId2;
 	}
-
 	public void setStartDate1(LocalDate startDate1) {
 		this.startDate1 = startDate1;
 	}
-
 	public void setEndDate1(LocalDate endDate1) {
 		this.endDate1 = endDate1;
 	}
-
 	public void setStartDate2(LocalDate startDate2) {
 		this.startDate2 = startDate2;
 	}
-
 	public void setEndDate2(LocalDate endDate2) {
 		this.endDate2 = endDate2;
 	}
-
 	public long calcDuration() {
 		LocalDate periodStart;
 		if (startDate1.isBefore(startDate2)) {
